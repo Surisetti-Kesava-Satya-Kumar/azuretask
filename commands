@@ -1,0 +1,24 @@
+QA :
+terraform init -backend-config="./env/qa/qa-backend.tfvars" -migrate-state
+terraform plan -state=./env/qa/qa.tfstate -var-file=./env/qa/qa.tfvars
+terraform apply -state=./env/qa/qa.tfstate -var-file=./env/qa/qa.tfvars --auto-approve
+terraform destroy -state=./env/qa/qa.tfstate -var-file=./env/qa/qa.tfvars --auto-approve
+
+PROD:
+terraform init -backend-config="./env/prod/prod-backend.tfvars" -migrate-state
+terraform plan -state=./env/prod/prod.tfstate -var-file=./env/prod/prod.tfvars
+terraform apply -state=./env/prod/prod.tfstate -var-file=./env/prod/prod.tfvars --auto-approve
+terraform destroy -state=./env/prod/prod.tfstate -var-file=./env/prod/prod.tfvars --auto-approve
+
+
+Initializing modules...
+
+Initializing the backend...
+╷
+│ Error: Backend configuration changed
+│
+│ A change in the backend configuration has been detected, which may require migrating existing state.
+│
+│ If you wish to attempt automatic migration of the state, use "terraform init -migrate-state".
+│ If you wish to store the current configuration with no changes to the state, use "terraform init -reconfigure".
+╵
